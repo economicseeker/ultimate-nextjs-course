@@ -1,10 +1,13 @@
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-3xl text-violet-700 font-black">
+    <>
+      <h1 className="h1-bold font-inter text-primary-500">
         Welcome to Next.js 👋🏻
       </h1>
-    </div>
+      <h1 className="h1-bold font-space-grotesk text-primary-500">
+        Welcome to Next.js 👋🏻
+      </h1>
+    </>
   );
 };
 
