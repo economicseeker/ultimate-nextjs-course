@@ -3,11 +3,14 @@ import { ValidationError, NotFoundError } from "@/lib/http-errors";
 import { UserSchema } from "@/lib/validations";
 import User from "@/database/user.model";
 import { NextResponse } from "next/server";
+import dbConnect from "@/lib/mongoose";
 
 export async function POST(request: Request) {
   const { email } = await request.json();
 
   try {
+    await dbConnect();
+
     const validatedData = UserSchema.partial().safeParse({ email });
 
     if (!validatedData.success)
