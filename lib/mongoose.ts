@@ -1,11 +1,8 @@
 import mongoose, { Mongoose } from "mongoose";
 import logger from "./logger";
 
-const MONGODB_URI = process.env.MONGODB_URI as string;
-
-if (!MONGODB_URI) {
-  throw new Error("MONGODB_URI is not defined");
-}
+// Defer env validation to connection time to avoid throwing at import.
+const MONGODB_URI: string | undefined = process.env.MONGODB_URI;
 
 interface MongooseCache {
   conn: Mongoose | null;
@@ -29,6 +26,10 @@ const dbConnect = async (): Promise<Mongoose> => {
   }
 
   if (!cached.promise) {
+    if (!MONGODB_URI) {
+      throw new Error("MONGODB_URI is not defined");
+    }
+
     cached.promise = mongoose
       .connect(MONGODB_URI, { dbName: "devflow" })
       .then((result) => {

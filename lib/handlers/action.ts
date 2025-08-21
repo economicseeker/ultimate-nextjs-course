@@ -48,7 +48,14 @@ async function action<T>({
     }
   }
 
-  await dbConnect();
+  try {
+    await dbConnect();
+  } catch (error) {
+    if (error instanceof Error) {
+      return new Error(`Database connection failed: ${error.message}`);
+    }
+    return new Error("Database connection failed");
+  }
 
   return { params, session };
 }
