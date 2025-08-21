@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { auth } from "@/auth";
 import SessionProvider from "@/components/providers/SessionProvider";
 import { ReactNode } from "react";
